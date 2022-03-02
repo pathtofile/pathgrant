@@ -33,10 +33,3 @@ vagrant box add ubuntu-20.04-gui.box --name ubuntu-20.04-gui --force
 # Vagrant
 There is both a non-GUI and a GUI box.
 The GUI box requires you to first run Packer to build it.
-
-### Run
-Start box from Vagrant
-```bash
-cd vagrant
-vagrant up --provider hyperv
-```
