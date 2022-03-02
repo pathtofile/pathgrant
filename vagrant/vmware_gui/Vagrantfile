@@ -1,0 +1,13 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu-20.04-gui"
+  config.vm.define "pathgrant"
+  config.vm.box_check_update = true
+
+  config.vm.hostname = "pathgrant.local"
+
+  config.vm.provider "vmware_desktop" do |vm|
+    vm.gui = true
+    vm.vmx["memsize"] = "4096"
+    vm.vmx["numvcpus"] = "2"
+  end
+end

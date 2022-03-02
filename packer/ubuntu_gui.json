@@ -1,0 +1,27 @@
+{
+  "builders": [{
+    "type": "vmware-vmx",
+    "source_path": "path_to_ubuntu-20.04-amd64.vmx",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "30s",
+    "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "environment_vars": [
+      "HOME_DIR=/home/vagrant"
+    ],
+    "execute_command": "cd /home/vagrant && echo 'vagrant' | {{.Vars}} sudo -SEH bash -eux '{{.Path}}'",
+    "expect_disconnect": true,
+    "scripts": [
+      "{{template_dir}}/vagrant.sh",
+      "{{template_dir}}/install_gui.sh"
+    ]
+  }],
+  "post-processors": [{
+    "type": "vagrant",
+    "keep_input_artifact": true,
+    "output": "ubuntu-20.04-gui.box"
+  }]
+}
